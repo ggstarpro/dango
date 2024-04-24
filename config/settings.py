@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 追加
     'mysite',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Djangoで標準のユーザモデルでなく定義したユーザモデルを使用することを宣言
+AUTH_USER_MODEL = 'mysite.User'

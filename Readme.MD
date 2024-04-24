@@ -29,4 +29,14 @@ $ python manage.py livereload
 # ポート番号がすでに使用されていた場合
 LIVERELOAD_PORT = "8080"
 
-## bootstrap5
+##
+python manage.py startapp blog
+
+## マイグレーション
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+## 管理者作成
+python manage.py createsuperuser
+Email: test@example.com
+Password: p@ssword
