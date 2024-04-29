@@ -3,8 +3,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.contrib.auth.views import LoginView
 from blog.models import Article
-from mysite.forms import UserCreationForm
+from mysite.forms import UserCreationForm, ProfileForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 def index(request: HttpRequest) -> HttpResponse:
     articles = Article.objects.all()[:3]
@@ -33,6 +35,20 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = True
             user.save()
+            # ログインさせる
+            login(request, user)
             messages.success(request, '登録完了')
             return redirect('/')
     return render(request, 'mysite/auth.html', context)
+
+@login_required
+def mypage(request):
+    context = {}
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, '更新完了しました')
+    return render(request, 'mysite/mypage.html', context)

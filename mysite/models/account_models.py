@@ -56,3 +56,15 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+# --- OneToOneFieldを同時に作成 ---
+from django.db.models.signals import post_save # saveされた直後
+from django.dispatch import receiver
+
+@receiver(post_save, sender=User)
+def create_one_to_one(sender, **kwargs):
+    if kwargs['created']:
+        from mysite.models.profile_models import Profile
+        Profile.objects.create(user=kwargs['instance'])
+# --- OneToOneFieldを同時に作成 ---

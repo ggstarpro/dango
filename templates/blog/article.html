@@ -12,6 +12,8 @@
               {{article.crated_at}} {{article.author}}
             </p>
             <p>{{ article.text }}</p>
+            <hr>
+            {% include 'mysite/snippets/comment.html'  %}
         </div>
         {% include 'mysite/snippets/sidebar.html' %}
     </div>
