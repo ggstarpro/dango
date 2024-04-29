@@ -134,3 +134,19 @@ STATIC_URL = '/static/'
 
 # Djangoで標準のユーザモデルでなく定義したユーザモデルを使用することを宣言
 AUTH_USER_MODEL = 'mysite.User'
+
+# ログインURLを定義
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+# --------- massage tab with bootstrap alert class ---------------------
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'rounded-0 alert alert-danger',
+    messages.WARNING: 'rounded-0 alert alert-warning',
+    messages.SUCCESS: 'rounded-0 alert alert-success',
+    messages.INFO: 'rounded-0 alert alert-info',
+    messages.DEBUG: 'rounded-0 alert alert-secondary',
+ }
+# --------- massage tab with bootstrap alert class ---------------------
