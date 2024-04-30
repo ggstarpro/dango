@@ -28,6 +28,16 @@ DEBUG = True
 # 追加
 ALLOWED_HOSTS = ['*']
 
+if DEBUG:
+    import yaml
+    with open(os.path.join(BASE_DIR, 'secrets', 'secret_dev.yaml'), encoding="utf-8") as file:
+        objs = yaml.safe_load(file)
+        for obj in objs:
+            os.environ[obj] = objs[obj]
+            print(objs[obj])
+            # print('>>>>>>>>>>', os.environ['password'])
+else:
+    pass
 
 # Application definition
 
@@ -150,3 +160,12 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'rounded-0 alert alert-secondary',
  }
 # --------- massage tab with bootstrap alert class ---------------------
+
+# --- Gmail ---
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+# --- Gmail ---

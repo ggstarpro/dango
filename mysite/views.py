@@ -7,6 +7,8 @@ from mysite.forms import UserCreationForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.core.mail import send_mail
+import os
 
 def index(request: HttpRequest) -> HttpResponse:
     ranks = Article.objects.order_by('-count')[:2] # 降順
@@ -54,3 +56,25 @@ def mypage(request):
             profile.save()
             messages.success(request, '更新完了しました')
     return render(request, 'mysite/mypage.html', context)
+
+def contact(request):
+    context = {}
+    if request.method == 'POST':
+        subject = 'お問い合わせがありました'
+        message = """お問い合わせがありました\n名前: {}\nメールアドレス: {}\n内容: {}""".format(
+            request.POST.get('name'),
+            request.POST.get('email'),
+            request.POST.get('content'),
+        )
+        from_email = os.environ['DEFAULT_EMAIL_FROM']
+        recipient_list = [
+            os.environ['DEFAULT_EMAIL_FROM']
+        ]
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=recipient_list
+        )
+        messages.success(request, 'お問い合わせしました')
+    return render(request, 'mysite/contact.html', context)

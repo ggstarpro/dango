@@ -21,6 +21,7 @@ class Comment(models.Model):
     comment = models.TextField(default="", max_length=500)
     created_at = models.DateField(auto_now_add=True)
     """
+    ◽️リレーション
     他にも以下のものが存在
     OneToOne     1 : 1
     ForeignKey   1 : 多

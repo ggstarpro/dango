@@ -44,3 +44,6 @@ Password: p@ssword
 
 # Bootstrap Icons
 https://icons.getbootstrap.com/
+
+# ライブラリ
+pip install PyYAML
