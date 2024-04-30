@@ -4,6 +4,7 @@
 
 # 環境構築
 $ python3 -m venv venv
+
 $ source venv/bin/activate
 
 $ pip install django==3.1.4
@@ -40,3 +41,6 @@ $ python manage.py migrate
 python manage.py createsuperuser
 Email: test@example.com
 Password: p@ssword
+
+# Bootstrap Icons
+https://icons.getbootstrap.com/
