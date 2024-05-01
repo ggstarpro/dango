@@ -23,12 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5#&cs^-ig02^8_btwduwjq02c8=82jg)8ua_+75fh#f^gxr-ex'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# 追加
-ALLOWED_HOSTS = ['*']
-
-if DEBUG:
+DEBUG = False
+if os.getenv('GAE_APPLICATION', None):
+    pass
+    ALLOWED_HOSTS = [
+        'mg-test-django3-dev.an.r.appspot.com',
+    ]
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
     import yaml
     with open(os.path.join(BASE_DIR, 'secrets', 'secret_dev.yaml'), encoding="utf-8") as file:
         objs = yaml.safe_load(file)
@@ -36,8 +39,8 @@ if DEBUG:
             os.environ[obj] = objs[obj]
             print(objs[obj])
             # print('>>>>>>>>>>', os.environ['password'])
-else:
-    pass
+# 追加
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -96,13 +99,36 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USERNAME'],
+            'PASSWORD': os.environ['DB_USERPASS'],
+            'HOST': '/cloudsql/{}'.format(os.environ['DB_CONNECTION']),
+        },
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USERNAME'],
+            'PASSWORD': os.environ['DB_USERPASS'],
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        },
+    }
 
+    """
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        },
+    }
+    """
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -126,9 +152,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja-jp'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -145,6 +171,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+# Django標準の管理画面のデザインの静的ファイル
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # --- static 設定項目 ---
 
 # Djangoで標準のユーザモデルでなく定義したユーザモデルを使用することを宣言

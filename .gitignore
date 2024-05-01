@@ -18,4 +18,17 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-secrets/secret_dev.yaml
+
+# シークレットファイル
+secrets/*
+!secrets/secret_dev_example.yaml
+!secrets/secret_example.yaml
+
+
+# SDK
+google-cloud-sdk/*
+!google-cloud-sdk/.gitkeep
+
+# 本番用ファイル
+staticfiles/*
+!staticfiles/.gitkeep
