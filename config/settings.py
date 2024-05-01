@@ -141,6 +141,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# --- static 設定項目 ---
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+# --- static 設定項目 ---
 
 # Djangoで標準のユーザモデルでなく定義したユーザモデルを使用することを宣言
 AUTH_USER_MODEL = 'mysite.User'
