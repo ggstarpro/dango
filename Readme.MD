@@ -179,3 +179,18 @@ $ gcloud app browse
 
 ### 静的ファイルを集める(collectstatic)
 `python manage.py collectstatic`
+
+# reCAPTCHA
+v3 Admin Console
+ラベル > ReallySite
+チャレンジv2 > 私はロボットで貼りません
+ドメイン > localhost
+ドメイン > mg-test-django3-dev.an.r.appspot.com  (https://mg-test-django3-dev.an.r.appspot.com)
+
+```
+# google reCAPTCHA の　開発用キーになります。
+# 参考: https://developers.google.com/recaptcha/docs/faq#im-getting-an-error-localhost-is-not-in-the-list-of-supported-domains-this-was-working-before-what-should-i-do
+```
+
+## 設定
+https://developers.google.com/recaptcha/docs/display?hl=ja

@@ -25,7 +25,6 @@ SECRET_KEY = '5#&cs^-ig02^8_btwduwjq02c8=82jg)8ua_+75fh#f^gxr-ex'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 if os.getenv('GAE_APPLICATION', None):
-    pass
     ALLOWED_HOSTS = [
         'mg-test-django3-dev.an.r.appspot.com',
     ]
@@ -37,6 +36,7 @@ else:
         objs = yaml.safe_load(file)
         for obj in objs:
             os.environ[obj] = objs[obj]
+            print('settings.py >>>')
             print(objs[obj])
             # print('>>>>>>>>>>', os.environ['password'])
 # 追加
@@ -110,25 +110,23 @@ if os.getenv('GAE_APPLICATION', None):
         },
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['DB_NAME'],
-            'USER': os.environ['DB_USERNAME'],
-            'PASSWORD': os.environ['DB_USERPASS'],
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-        },
-    }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': os.environ['DB_NAME'],
+    #         'USER': os.environ['DB_USERNAME'],
+    #         'PASSWORD': os.environ['DB_USERPASS'],
+    #         'HOST': '127.0.0.1',
+    #         'PORT': '3306',
+    #     },
+    # }
 
-    """
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         },
     }
-    """
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
