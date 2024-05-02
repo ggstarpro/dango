@@ -26,6 +26,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path('blog/', include('blog.urls')),
     path('signup/', views.signup),
-    path('mypage/', views.mypage),
-    path('contact/', views.contact),
+    # path('mypage/', views.mypage),
+    path('mypage/', views.MypageView.as_view()),
+    # path('contact/', views.contact),
+    path('contact/', views.ContactView.as_view()),
 ]
