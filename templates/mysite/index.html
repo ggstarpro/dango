@@ -7,10 +7,7 @@
     <div class="p-4 p-md-5 mb-4 rounded bg-warning">
         <div class="col-md-6 px-0">
             <h1 class="display-4 font-italic">Django講座</h1>
-            <p class="lead my-3">文章をかこう</p>
-            <p class="lead mb-0">
-                <a href="#" class="font-weight-bold">続きを読む</a>
-            </p>
+            <p class="lead my-3">文章をかこうツ</p>
         </div>
     </div>
 
@@ -20,11 +17,24 @@
             <div class="row g-0 border rounded overflow-hidden flex-md-row
             mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">Django</strong>
+                    <strong class="d-inline-block mb-2 text-primary">
+                        {% for tag in rank.tags.all %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </strong>
                     <h3 class="mb-0">{{rank.title}}</h3>
-                    <div class="mb-1 text-muted">{{ rank.created_at }}</div>
+                    <div class="mb-1 text-muted">
+                        {{ rank.created_at }}
+                        <div class="d-inline-block text-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="16" fill="currentColor" class="bi bi-lightning-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                            </svg>
+                            {{ rank.count }}
+                        </div>
+                    </div>
                     <p class="card-text mb-auto">{{ rank.text }}</p>
-                    <a href="/blog/{{rank.id}}" class="stretched-link">続きを読む^^</a>
+                    <!-- stretched-linkでカード自体押下で遷移できる -->
+                    <a href="/blog/{{rank.id}}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
@@ -47,7 +57,8 @@
                     <p class="blog-post-meta">
                         {{ article.created_at }} by {{ article.author }}
                     </p>
-                    <p>{{ article.text }}</p>
+                    <!-- 組み込みテンプレートタグ -->
+                    <p>{{ article.text|slice:":19" }}</p>
                     <a href="/blog/{{article.id}}">続きはこちら</a>
                 </div>
                 <hr>

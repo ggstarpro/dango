@@ -194,3 +194,34 @@ v3 Admin Console
 
 ## 設定
 https://developers.google.com/recaptcha/docs/display?hl=ja
+
+# migrationファイルupload_to
+設定すると下記エラーが出るので`pip install Pillow`
+
+```
+SystemCheckError: System check identified some issues:
+ERRORS:
+mysite.Profile.img: (fields.E210) Cannot use ImageField because Pillow is not installed.
+        HINT: Get Pillow at https://pypi.org/project/Pillow/ or run command "python -m pip install Pillow".
+```
+
+# GCS
+*
+APIとサービス > 認証情報 > 編集 > キーを追加 > JSON > 作成
+jsonファイルをsecretsフォルダ配下に配置
+
+*
+Storage > バケットを作成 > gg-really-site > Region > asia-northeast1 > Standard > きめ細かい管理 > 削除ボリシーOFF > 作成
+```
+公開アクセスの防止
+このバケットは、公共のインターネット上でバケット内のデータが公開されないように設定されています。
+公開アクセスを必要とするユースケース（静的ウェブサイトのホスティングなど）がある場合を除き、この設定は有効のままにしてください。この設定は今すぐでも後からでも変更可能です。
+▫︎このバケットに対する公開アクセス禁止を適用する
+```
+*
+`pip install django-storages`
+`pip install google-cloud-storage`
+
+*誰でも見れるように
+新しいプリンシパル > allUsers
+ロール > Storage > Storageオブジェクト閲覧者

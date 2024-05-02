@@ -19,9 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5#&cs^-ig02^8_btwduwjq02c8=82jg)8ua_+75fh#f^gxr-ex'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 if os.getenv('GAE_APPLICATION', None):
@@ -39,6 +36,10 @@ else:
             print('settings.py >>>')
             print(objs[obj])
             # print('>>>>>>>>>>', os.environ['password'])
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+
 # 追加
 ALLOWED_HOSTS = ['*']
 
@@ -121,6 +122,7 @@ else:
     #     },
     # }
 
+    # sqlite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -171,6 +173,17 @@ STATICFILES_DIRS = [
 ]
 # Django標準の管理画面のデザインの静的ファイル
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# --- GCS 設定項目 ---
+from google.oauth2 import service_account
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, 'secrets', os.environ['GCS_CREDENTIALS_FILENAME'])
+)
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = os.environ['GCS_BUCKET_NAME']
+GS_BUCKET_ID = os.environ['GCS_PROJECT_ID']
+# --- GCS 設定項目 ---
 # --- static 設定項目 ---
 
 # Djangoで標準のユーザモデルでなく定義したユーザモデルを使用することを宣言
