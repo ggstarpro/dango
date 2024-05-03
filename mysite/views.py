@@ -165,3 +165,34 @@ def grecaptcha_request(token):
     print(response)
     return response['success']
 
+import payjp
+
+class PayView(View):
+    payjp.api_key = os.environ['PAYJP_SECRET_KEY']
+    public_key = os.environ['PAYJP_PUBLIC_KEY']
+    amount = 1000
+
+    def get(self, request):
+        context = {
+            'amount': self.amount,
+            'public_key': self.public_key,
+        }
+        return render(request, 'mysite/pay.html', context)
+
+    def post(self, request):
+        customer = payjp.Customer.create(
+            email='test@pay.jp',
+            card=request.POST.get('payjp-token'),
+        )
+        charge = payjp.Charge.create(
+            amount=self.amount,
+            currency='jpy',
+            customer=customer.id,
+            description='支払いテスト',
+        )
+        context = {
+            'amount': self.amount,
+            'public_key': self.public_key,
+            'charge': charge,
+        }
+        return render(request, 'mysite/pay.html', context)

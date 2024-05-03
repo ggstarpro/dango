@@ -225,3 +225,20 @@ Storage > バケットを作成 > gg-really-site > Region > asia-northeast1 > St
 *誰でも見れるように
 新しいプリンシパル > allUsers
 ロール > Storage > Storageオブジェクト閲覧者
+
+# 決済 [PAY.JP](https://pay.jp/)
+`pip install payjp`
+
+* https://pay.jp/docs/api/?python#
+* https://pay.jp/docs/flask-checkout
+
+
+
+## 支払い処理を試してみましょう。
+```
+項目	        値
+カード番号	4242424242424242
+有効期限	12/26
+CVC	       123
+カード名義	PAY TARO
+```

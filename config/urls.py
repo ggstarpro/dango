@@ -30,4 +30,5 @@ urlpatterns = [
     path('mypage/', views.MypageView.as_view()),
     # path('contact/', views.contact),
     path('contact/', views.ContactView.as_view()),
+    path('pay/', views.PayView.as_view()),
 ]

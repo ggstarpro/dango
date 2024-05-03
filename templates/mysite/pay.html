@@ -1,0 +1,79 @@
+{% extends 'mysite/base.html' %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="pb-4 font-italic border-bottom">
+                決済 DEMO
+            </h3>
+        </div>
+        {% if charge %}
+        chargeの中身: {{charge}}
+        <!--
+        chargeの中身:
+        {
+            "amount": 1000,
+            "amount_refunded": 0,
+            "captured": true,
+            "captured_at": 1714726043,
+            "card": {
+                "address_city": null,
+                "address_line1": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": "unchecked",
+                "brand": "Visa",
+                "country": null,
+                "created": 1714726041,
+                "customer": "cus_3966251d81e67d7076f4a95d798a",
+                "cvc_check": "passed",
+                "exp_month": 12,
+                "exp_year": 2025,
+                "fingerprint": "e1d8225886e3a7211127df751c86787f",
+                "id": "car_0cffa4e8c7b43e1d5756bf298864",
+                "last4": "4242",
+                "livemode": false,
+                "metadata": {},
+                "name": "PAY TARO",
+                "object": "card",
+                "three_d_secure_status": null
+            },
+            "created": 1714726043,
+            "currency": "jpy",
+            "customer": "cus_3966251d81e67d7076f4a95d798a",
+            "description": "\u652f\u6255\u3044\u30c6\u30b9\u30c8",
+            "expired_at": null,
+            "failure_code": null,
+            "failure_message": null,
+            "fee_rate": "3.00",
+            "id": "ch_1cad61a262a062dd248b89e096e88",
+            "livemode": false,
+            "metadata": {},
+            "object": "charge",
+            "paid": true,
+            "refund_reason": null,
+            "refunded": false,
+            "subscription": null,
+            "term_id": null,
+            "three_d_secure_status": null
+        }
+         -->
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+
+            <script
+                type="text/javascript"
+                src="https://checkout.pay.jp"
+                class="payjp-button"
+                data-key="{{ public_key }}">
+            </script>
+
+        </form>
+        {% include 'mysite/snippets/sidebar.html' %}
+    </div>
+</main>
+{% endblock %}
