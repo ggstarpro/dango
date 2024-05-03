@@ -1,10 +1,11 @@
 {% extends 'mysite/base.html' %}
-
+{% load cache %}
 {% block content %}
 
 <main class="container">
     <div class="row">
         <div class="col-md-8">
+            {% cache 86400 article article.id %}
             <h3 class="font-italic display-4">
               {{ article.title }}
             </h3>
@@ -16,6 +17,7 @@
             <div class="my-5">
               {% include 'mysite/snippets/pr_in_article.html' %}
             </div>
+            {% endcache %}
 
             <div>
             {% include 'mysite/snippets/tag.html'  %}

@@ -291,3 +291,20 @@ URLプレフィックス: https://mg-test-django3-dev.an.r.appspot.com
 申請しないとできないので今回はしない。
 
 
+# DB キャッシュ
+`python manage.py createcachetable`
+`python manage.py dbshell`
+```
+sqlite> .tables
+auth_group              blog_comment            django_migrations
+auth_group_permissions  blog_tag                django_session
+auth_permission         cache_table             mysite_profile
+blog_article            django_admin_log        mysite_user
+blog_article_tags       django_content_type
+```
+▫︎Viewごとにキャッシュ
+mysite > views.py::cache_test にやり方を記載
+▫︎URL単位でキャッシュ
+
+
+# Templateキャッシュ

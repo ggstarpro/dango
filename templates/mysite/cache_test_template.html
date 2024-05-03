@@ -1,0 +1,12 @@
+<!-- テンプレートキャッシュ -->
+{% load cache %}
+
+<p>キャッシュなし {{time}}</p>
+
+{% cache 10 first_cache %}
+<p>キャッシュあり {{time}}</p>
+{% endcache %}
+
+{% cache 30 first_cache name %}
+<p>キャッシュあり 分岐(ユーザごと等) {{time}}</p>
+{% endcache %}

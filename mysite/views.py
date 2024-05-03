@@ -196,3 +196,45 @@ class PayView(View):
             'charge': charge,
         }
         return render(request, 'mysite/pay.html', context)
+
+from django.views.decorators.cache import cache_page
+
+# view単位でキャッシュ (10秒はキャッシュされる, ユーザによって決まっているページに使用)
+@cache_page(10)
+def cache_test(request):
+    context = {
+        'answer': prime_factorize(9867280421310721)
+    }
+    return render(request, 'mysite/cache_test.html', context)
+
+# url単位でキャッシュ
+def cache_test2(request):
+    context = {
+        'answer': prime_factorize(9867280421310721)
+    }
+    return render(request, 'mysite/cache_test.html', context)
+
+# templateキャッシュ
+def cache_test3(request):
+    import datetime
+    context = {
+        'time': datetime.datetime.now().isoformat(),
+        'name': request.GET.get('name', None)
+    }
+    return render(request, 'mysite/cache_test_template.html', context)
+
+def prime_factorize(n):
+    a = []
+    while n % 2 == 0:
+        a.append(2)
+        n //= 2
+    f = 3
+    while f * f <= n:
+        if n % f == 0:
+            a.append(f)
+            n //= f
+        else:
+            f += 2
+    if n != 1:
+        a.append(n)
+    return a

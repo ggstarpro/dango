@@ -18,6 +18,7 @@ from django.contrib.auth.views import LogoutView
 # from django.urls import path
 from django.urls import path, include
 from mysite import views
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +32,10 @@ urlpatterns = [
     # path('contact/', views.contact),
     path('contact/', views.ContactView.as_view()),
     path('pay/', views.PayView.as_view()),
+    # view単位 DBキャッシュ
+    path('cache_test/', views.cache_test),
+    # url単位 DBキャッシュ
+    path('cache_test2/', cache_page(10)(views.cache_test2)),
+    # templateキャッシュ
+    path('cache_test3/', views.cache_test3),
 ]

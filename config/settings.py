@@ -213,3 +213,13 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 # --- Gmail ---
+
+
+# --- DBキャッシュ https://docs.djangoproject.com/en/5.0/topics/cache/ ---
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
+    }
+}
+# --- DBキャッシュ https://docs.djangoproject.com/en/5.0/topics/cache/ ---
