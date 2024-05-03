@@ -11,7 +11,11 @@
             <p class="small text-muted text-right">
               {{article.crated_at}} {{article.author}}
             </p>
-            <div class="my-5">{{ article.text }}</div>
+            <div class="my-5">{{ article.text|safe }}</div>
+
+            <div class="my-5">
+              {% include 'mysite/snippets/pr_in_article.html' %}
+            </div>
 
             <div>
             {% include 'mysite/snippets/tag.html'  %}

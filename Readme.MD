@@ -242,3 +242,52 @@ Storage > バケットを作成 > gg-really-site > Region > asia-northeast1 > St
 CVC	       123
 カード名義	PAY TARO
 ```
+
+# [Google アナリティクス](https://analytics.google.com/analytics/web/?hl=ja&pli=1#)
+アカウントの詳細 > アカウント名 > ReallySite
+▫︎ Google のプロダクトとサービス
+▫︎ モデリングのためのデータ提供とビジネス分析情報
+▫︎ テクニカル サポート
+▫︎ ビジネスの最適化案
+
+プロパティ名（必須）> really-site
+タイムゾーン > 日本
+通貨 > ドル
+その他　>　小規模
+
+プラットフォームを選択してください > Web > mg-test-django3-dev.an.r.appspot.com > ReallySite (ストリーム名)
+
+グローバルサイトタグ
+```
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6XWT1WFL0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q6XWT1WFL0');
+</script>
+```
+- pip freeze > requirements.txt
+- python manage.py collectstatic
+
+```
+You have requested to collect static files at the destination
+location as specified in your settings:
+    django3/staticfiles
+This will overwrite existing files!
+Are you sure you want to do this?
+Type 'yes' to continue, or 'no' to cancel: yes
+```
+
+gcloud app deploy --project mg-test-django3-dev
+
+# [Googleサーチコンソールの設定](https://search.google.com/search-console/about?hl=ja)
+URLプレフィックス: https://mg-test-django3-dev.an.r.appspot.com
+
+
+# [Google AdSense](https://adsense.google.com/intl/ja_jp/start/)
+申請しないとできないので今回はしない。
+
+

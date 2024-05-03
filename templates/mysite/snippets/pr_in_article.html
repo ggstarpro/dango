@@ -1,0 +1,8 @@
+{% load static %}
+{% for tag in article.tags.all %}
+  {% if 'Udemy' in tag.name or 'Django' in tag.name %}
+  <a href="https://mg-test-django3-dev.an.r.appspot.com/?referralCode=ABC1234">
+    <img src="{% static 'mysite/img2.png' %}" width="50%" height="auto">
+  </a>
+  {% endif %}
+{% endfor %}
