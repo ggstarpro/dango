@@ -291,7 +291,7 @@ URLプレフィックス: https://mg-test-django3-dev.an.r.appspot.com
 申請しないとできないので今回はしない。
 
 
-# DB キャッシュ
+# DB キャッシュ・Templateキャッシュ
 `python manage.py createcachetable`
 `python manage.py dbshell`
 ```
@@ -307,4 +307,8 @@ mysite > views.py::cache_test にやり方を記載
 ▫︎URL単位でキャッシュ
 
 
-# Templateキャッシュ
+# [マテリアルデザイン](https://materializecss.com/)
+
+
+# [Django Site Map](https://docs.djangoproject.com/en/3.1/ref/contrib/sitemaps/)
+Google Search Console > サイトマップに該当

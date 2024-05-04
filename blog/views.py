@@ -54,3 +54,19 @@ def tags(request, slug):
     }
 
     return render(request, 'blog/blogs.html', context)
+
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import JsonResponse
+
+@ensure_csrf_cookie
+def like(request, pk):
+    d = {"message": "error"}
+    if request.method == 'POST':
+        print("post")
+        obj = Article.objects.get(pk=pk)
+        obj.count += 1
+        obj.save()
+
+        d["message"] = "success"
+    return JsonResponse(d)

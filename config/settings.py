@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     # 追加
     'mysite',
     'blog',
+    # for サイトマップ
+    'django.contrib.sitemaps'
 ]
 
 MIDDLEWARE = [

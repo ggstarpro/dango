@@ -20,6 +20,20 @@ def index(request: HttpRequest) -> HttpResponse:
     }
     return render(request, 'mysite/index.html', context)
 
+def langding_mui(request: HttpRequest) -> HttpResponse:
+    context = {
+    }
+    return render(request, 'mysite/landing_mui.html', context)
+
+@login_required
+def ping(request):
+    from django.contrib.sitemaps import ping_google
+    try:
+        if request.user.is_admin:
+            ping_google()
+    except Exception as e:
+        print(e)
+    return redirect('/')
 
 class Login(LoginView):
     template_name='mysite/auth.html'
